@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import "./App.css";
+import HomePage from "./components/HomePage";
+import Categories from "./components/Categories";
+import ProductsList from "./components/ProductsList";
+import Product from "./components/Product";
+import CartPage from "./components/CartPage";
+import ProfilePage from "./pages/ProfilePage";
+import ErrorPage from "./pages/ErrorPage";
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/categories">Categories</Link>
+          </li>
+          <li>
+            <Link to="/products-list">ProductList</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/products-list" element={<ProductsList />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
