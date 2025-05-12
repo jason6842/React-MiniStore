@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { getCategories } from "../api/product";
+import { Category } from "../types/category";
 
 export default function Categories() {
   const { data, isLoading, isError, error } = useQuery({
@@ -15,7 +16,7 @@ export default function Categories() {
   console.log(data);
   return (
     <ul>
-      {data?.map((category) => {
+      {data?.map((category: Category) => {
         return <li key={category.id}>{category.name}</li>;
       })}
     </ul>

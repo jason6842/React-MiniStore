@@ -4,9 +4,9 @@ import HomePage from "./components/HomePage";
 import Categories from "./components/Categories";
 import ProductsList from "./components/ProductsList";
 import Product from "./components/Product";
-import CartPage from "./components/CartPage";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
+import CartPage from "./pages/CartPage";
 
 
 function App() {
