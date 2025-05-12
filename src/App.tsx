@@ -7,6 +7,7 @@ import Product from "./components/Product";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorPage from "./pages/ErrorPage";
 import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
           <li>
             <Link to="/products-list">ProductList</Link>
           </li>
+          <li>
+            <Link to="/login">LogIn</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -32,6 +36,7 @@ function App() {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
