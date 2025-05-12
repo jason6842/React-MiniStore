@@ -15,6 +15,7 @@ export default function ProductsList() {
   } = useInfiniteQuery({
     queryKey: ["products"],
     queryFn: getPaginatedProducts,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, pages) => {
       return lastPage.length < 20 ? undefined : pages.length * 20;
     },

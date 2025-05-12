@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login as loginApi } from "../api/auth";
 import { toast } from "react-toastify";
+import { log } from "console";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,10 @@ export default function LoginPage() {
   const { mutate, isPending, error } = useMutation({
     mutationFn: loginApi,
     onSuccess: (data) => {
+      console.log("Login Response:", data);
+      console.log("access_token", data.access_token)
       login(data.access_token); // Save to contextApi + localStorage
+      localStorage.setItem("refresh_token", data.refresh_token);
       navigate("/products-list"); // Redirect products page
     },
     onError: () => {

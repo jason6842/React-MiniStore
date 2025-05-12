@@ -10,6 +10,11 @@ type LoginResponse = {
     refresh_token: string
 }
 
-export const login = (credentials: LoginInput): Promise<LoginResponse> => {
-    return axiosInstance.post("/auth/login", credentials);
+export const login = async (credentials: LoginInput): Promise<LoginResponse> => {
+    const response = await axiosInstance.post("/auth/login", credentials);
+    return response.data;
+}
+
+export const getProfile = () => {
+    return axiosInstance.get("/auth/profile").then((res) => res.data);
 }
