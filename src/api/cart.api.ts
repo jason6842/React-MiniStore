@@ -1,20 +1,5 @@
+import { CartType, UpdateCartType } from "../types/cart.types";
 import axiosInstance from "./axiosInstance";
-
-type CartType = {
-    userId: number,
-    products: {
-        id: number,
-        quantity: number,
-    }[];
-}
-
-type UpdateCartType = {
-    cartId: number,
-    products: {
-        id: number,
-        quantity: number,
-    }[];
-}
 
 export const getCart = (cartId: number) => {
     return axiosInstance.get(`/carts/${cartId}`).then(res => res.data);

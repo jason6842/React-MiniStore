@@ -1,20 +1,19 @@
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
-import HomePage from "./components/HomePage";
-import Categories from "./components/Categories";
-import ProductsList from "./components/ProductsList";
-import Product from "./components/Product";
-import ProfilePage from "./pages/ProfilePage";
-import ErrorPage from "./pages/ErrorPage";
+import HomePage from "./pages/Home.page";
+import ProductsList from "./pages/ProductsList.page";
+import Product from "./pages/ProductDetail.page";
+import ProfilePage from "./pages/Profile.page";
 import CartPage from "./pages/CartPage";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/Login.page";
+import NotFoundPage from "./pages/NotFound.page";
 
 
 function App() {
   return (
     <BrowserRouter>
       <nav>
-        <ul>
+        <ul style={{display: "flex", flexDirection: "row", gap:40}}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -37,13 +36,12 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/categories" element={<Categories />} />
         <Route path="/products-list" element={<ProductsList />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

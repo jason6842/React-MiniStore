@@ -1,5 +1,4 @@
 import axios from "axios";
-import { error } from "console";
 import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({

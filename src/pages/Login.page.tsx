@@ -2,9 +2,9 @@ import React, { FormEvent, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { login as loginApi } from "../api/auth";
+import { login as loginApi } from "../api/auth.api";
 import { toast } from "react-toastify";
-import { log } from "console";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

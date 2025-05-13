@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { getProfile } from "../api/auth";
+import { getProfile } from "../api/auth.api";
 
 export default function ProfilePage() {
   const {

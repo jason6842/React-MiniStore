@@ -1,11 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getProductDetail } from "../api/product";
+import { getProductDetail } from "../api/product.api";
 import { Link } from "react-router-dom";
-import { getProfile } from "../api/auth";
-import { addToCart, updateCart } from "../api/cart";
+import { getProfile } from "../api/auth.api";
+import { addToCart, updateCart } from "../api/cart.api";
 import { toast } from "react-toastify";
+import { Product } from "../types/product.types";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product }: { product: Product }) {
   const queryClient = useQueryClient();
 
   const { data: user } = useQuery({
@@ -59,11 +60,17 @@ export default function ProductCard({ product }) {
       });
     }
   };
+  console.log("PRODUCT:", product);
 
   return (
     <div onMouseEnter={prefetchProduct}>
       <Link to={`/product/${product.id}`}>
         <h3>{product.title}</h3>
+        <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
+          {product.images.map((image: string) => {
+            return <img src={image} style={{ width: 200, height: 200 }} />;
+          })}
+        </div>
       </Link>
       <button onClick={handleAddToCart}>Add To Cart</button>
     </div>

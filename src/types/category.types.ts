@@ -6,3 +6,8 @@ export interface Category {
   creationAt: string; // ISO timestamp
   updatedAt: string;  // ISO timestamp
 }
+
+export type CategorySelectProps = {
+  selectedCategory: number;
+  onSelectCategory: (categoryId: number) => void;
+}
