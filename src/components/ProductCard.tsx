@@ -60,7 +60,7 @@ export default function ProductCard({ product }: { product: Product }) {
       });
     }
   };
-  console.log("PRODUCT:", product);
+  // console.log("PRODUCT:", product);
 
   return (
     <div onMouseEnter={prefetchProduct}>
@@ -68,7 +68,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <h3>{product.title}</h3>
         <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
           {product.images.map((image: string) => {
-            return <img src={image} style={{ width: 200, height: 200 }} />;
+            return <img key={image} src={image} style={{ width: 200, height: 200 }} />;
           })}
         </div>
       </Link>

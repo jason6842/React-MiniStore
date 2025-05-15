@@ -7,13 +7,16 @@ import ProfilePage from "./pages/Profile.page";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/Login.page";
 import NotFoundPage from "./pages/NotFound.page";
+import { withAuth } from "./hoc/withAuth";
+import ProtectedRoute from "./components/ProtectedRoute";
 
+const ProtectedProductsList = withAuth(ProductsList);
 
 function App() {
   return (
     <BrowserRouter>
       <nav>
-        <ul style={{display: "flex", flexDirection: "row", gap:40}}>
+        <ul style={{ display: "flex", flexDirection: "row", gap: 40 }}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -36,8 +39,11 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products-list" element={<ProductsList />} />
-        <Route path="/product/:id" element={<Product />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/products-list" element={<ProductsList />} />
+          <Route path="/product/:id" element={<Product />} />
+        </Route>
+        <Route path="/products-list" element={<ProtectedProductsList />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/login" element={<LoginPage />} />

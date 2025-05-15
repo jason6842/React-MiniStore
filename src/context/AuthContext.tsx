@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
+import { useQueryClient } from "@tanstack/react-query";
 
 type AuthContextType = {
   token: string | null;
@@ -17,6 +18,7 @@ const AuthContext = createContext<AuthContextType>({
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const queryClient = useQueryClient();
 
   const refreshToken = async () => {
     try {
@@ -40,7 +42,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setToken(null);
+    localStorage.removeItem("refresh_token");
     localStorage.removeItem("token");
+    queryClient.clear();
   };
 
   return (
