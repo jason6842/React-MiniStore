@@ -6,10 +6,14 @@ import { Product } from "../types/product.types";
 import CategorySelect from "../components/CategoriesSelect";
 import { useFilteredProducts } from "../hooks/useFilteredProducts";
 import { usePaginatedProducts } from "../hooks/usePaginatedProducts";
+import useDebounce from "../hooks/useDebounce";
+import { Input } from "@/components/ui/input";
 
 export default function ProductsList() {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState(0);
+
+  const debouncedQuery = useDebounce(query, 500);
 
   // Infinite query
   const {
@@ -23,18 +27,19 @@ export default function ProductsList() {
   } = usePaginatedProducts();
 
   const { data: searchResults, isLoading: isLoadingSearch } =
-    useFilteredProducts({ query, categoryId });
+    useFilteredProducts({ query: debouncedQuery, categoryId });
 
   const isSearching = query !== "" || categoryId !== 0;
   console.log("search results:", searchResults);
 
   return (
     <div>
-      <input
+      <Input
         type="text"
         placeholder="Search products..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        className="border-gray-700"
       />
       {"  "}
       <CategorySelect
@@ -42,10 +47,11 @@ export default function ProductsList() {
         onSelectCategory={setCategoryId}
       />
       {/* if query is not an empty string */}
+      {isSearching && query !== debouncedQuery && <p>Searching...</p>}
+      {/* Conditional rendering for search and infinite products */}
       {isSearching ? (
-        // if query is not an empty string and it is still fetching
         isLoadingSearch ? (
-          <p>Searching...</p>
+          <p>Loading results...</p>
         ) : (
           <div>
             {/* if search results are 0 */}

@@ -9,10 +9,16 @@ import LoginPage from "./pages/Login.page";
 import NotFoundPage from "./pages/NotFound.page";
 import { withAuth } from "./hoc/withAuth";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useState } from "react";
+import { Button } from "./components/ui/button";
+import Modal from "./components/Modal";
+import LoginModal from "./components/LoginModal";
+import { ToastContainer } from "react-toastify";
 
 const ProtectedProductsList = withAuth(ProductsList);
 
 function App() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
   return (
     <BrowserRouter>
       <nav>
@@ -26,8 +32,11 @@ function App() {
           <li>
             <Link to="/products-list">ProductList</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/login">LogIn</Link>
+          </li> */}
+          <li>
+            <Button onClick={() => setShowLoginModal(true)}>Login</Button>
           </li>
           <li>
             <Link to="/profile">Profile</Link>
@@ -49,6 +58,14 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Modal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        title="Login"
+      >
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      </Modal>
+      <ToastContainer position="top-right" autoClose={3000} theme="dark"/>
     </BrowserRouter>
   );
 }

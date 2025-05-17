@@ -6,5 +6,6 @@ export const useProduct = (numericId: number | undefined) => {
     queryKey: ["product", numericId],
     queryFn: () => getProductDetail(numericId!),
     enabled: !!numericId,
+    staleTime: 1000 * 60 * 5,
   });
 }
