@@ -14,6 +14,7 @@ import { Button } from "./components/ui/button";
 import Modal from "./components/Modal";
 import LoginModal from "./components/LoginModal";
 import { ToastContainer } from "react-toastify";
+import SearchAutoComplete from "./components/SearchAutoComplete";
 
 const ProtectedProductsList = withAuth(ProductsList);
 
@@ -21,8 +22,8 @@ function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   return (
     <BrowserRouter>
-      <nav>
-        <ul style={{ display: "flex", flexDirection: "row", gap: 40 }}>
+      <nav className="flex items-center justify-between px-6 py-4 bg-white">
+        <ul className="flex gap-10">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -45,6 +46,7 @@ function App() {
             <Link to="/cart">Cart</Link>
           </li>
         </ul>
+        <SearchAutoComplete />
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />

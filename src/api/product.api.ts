@@ -25,3 +25,14 @@ export const getCategories = async () => {
     const response = await axiosInstance.get("/categories");
     return response.data;
 }
+
+export const getSuggestions = async (query: string, limit=5): Promise<Product[]> => {
+    const response = await axiosInstance.get(`/products`, {
+        params: {
+            title: query || undefined,
+            offset: 0,
+            limit: limit,
+        }
+    });
+    return response.data;
+}
